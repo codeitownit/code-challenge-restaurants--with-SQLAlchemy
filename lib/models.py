@@ -10,13 +10,13 @@ metadata = MetaData(naming_convention=convention)
 
 Base = declarative_base(metadata=metadata)
 
-# restaurant_customer = Table(
-#     'restaurant_customers',
-#     Base.metadata,
-#     Column('restaurant_id', ForeignKey('restaurants.id'), primary_key=True),
-#     Column('customer_id', ForeignKey('customers.id'), primary_key=True),
-#     extend_existing=True,
-# )
+restaurant_customer = Table(
+    'restaurant_customers',
+    Base.metadata,
+    Column('restaurant_id', ForeignKey('restaurants.id'), primary_key=True),
+    Column('customer_id', ForeignKey('customers.id'), primary_key=True),
+    extend_existing=True,
+)
 
 class Restaurant(Base):
     __tablename__ = 'restaurants'
@@ -26,7 +26,7 @@ class Restaurant(Base):
     price = Column(Integer())
 
     reviews = relationship('Review', backref=backref('restaurant'))
-    # customers = relationship('Customer', secondary=restaurant_customer, back_populates='restaurants')
+    customers = relationship('Customer', secondary=restaurant_customer, back_populates='restaurants')
 
     def __repr__(self):
         return f'Restaurant(id={self.id}, ' + \
@@ -58,7 +58,7 @@ class Customer(Base):
     last_name = Column(String())
 
     reviews = relationship('Review', backref=backref('customer'))
-    # restaurants = relationship('Restaurant', secondary=restaurant_customer, back_populates='restaurants')
+    restaurants = relationship('Restaurant', secondary=restaurant_customer, back_populates='restaurants')
 
    
     def __repr__(self):
