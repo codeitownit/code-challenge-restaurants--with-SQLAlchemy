@@ -40,7 +40,7 @@ class Review(Base):
     rating = Column(Integer())
     
     restaurant_id = Column(Integer(), ForeignKey('restaurants.id'))
-    # customer_id = Column(Integer(), ForeignKey('customers.id'))
+    customer_id = Column(Integer(), ForeignKey('customers.id'))
     
     
 
@@ -50,18 +50,18 @@ class Review(Base):
             f'restaurant_id={self.restaurant_id})'
 
 
-# class Customer(Base):
-#     __tablename__ = 'customers'
+class Customer(Base):
+    __tablename__ = 'customers'
 
-#     id = Column(Integer(), primary_key=True)
-#     first_name = Column(String())
-#     last_name = Column(String())
+    id = Column(Integer(), primary_key=True)
+    first_name = Column(String())
+    last_name = Column(String())
 
-#     reviews = relationship('Review', backref=backref('customer'))
-#     restaurants = relationship('Restaurant', secondary=restaurant_customer, back_populates='restaurants')
+    reviews = relationship('Review', backref=backref('customer'))
+    # restaurants = relationship('Restaurant', secondary=restaurant_customer, back_populates='restaurants')
 
    
-#     def __repr__(self):
-#         return f'Customer(id={self.id}, ' + \
-#             f'first_name={self.first_name}), ' + \
-#             f'last_name={self.last_name}'
+    def __repr__(self):
+        return f'Customer(id={self.id}, ' + \
+            f'first_name={self.first_name}), ' + \
+            f'last_name={self.last_name}'
