@@ -134,7 +134,7 @@ def main():
     all_reviews = session.query(Review).all()
     print("\nAll Reviews:")
     for review in all_reviews:
-        print(f"Review for {review.restaurant.name} by {review.customer.full_name()}: {review.star_rating} stars")
+        print(f"Review for {review.restaurant.name} by {review.customer.full_name()}: {review.rating} stars")
 
 if __name__ == "__main__":
     main()
